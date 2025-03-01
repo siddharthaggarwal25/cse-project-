@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
 
 let logoutTimer;
 
@@ -6,6 +7,7 @@ let logoutTimer;
   const [token, setToken] = useState(false);
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
   const [userId, setUserId] = useState(false);
+  // const navigate = useNavigate();
 
   const login = useCallback((uid, token, expirationDate) => {
     setToken(token);
@@ -28,6 +30,8 @@ let logoutTimer;
     setTokenExpirationDate(null);
     setUserId(null);
     localStorage.removeItem("userData");
+ 
+
   }, []);
 
   useEffect(() => {
@@ -38,7 +42,7 @@ let logoutTimer;
     } else {
       clearTimeout(logoutTimer);
     }
-  }, [token, logouxt, tokenExpirationDate]);
+  }, [token, logout, tokenExpirationDate]);
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userData"));

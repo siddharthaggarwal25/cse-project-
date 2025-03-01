@@ -1,9 +1,11 @@
 import React from "react";
-
-import  AuthContext  from "./context/authContext";
-import  useAuth  from "./hooks/authHook";
+import AuthContext from "./context/authContext";
+import useAuth from "./hooks/authHook";
 import Signup from "./components/signup";
-import Login from "./components/login"
+import Login from "./components/login";
+import Navbar from "./components/navbar";
+import Footer from "./components/footer";
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,39 +13,42 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import "./App.css";
-function hello () {
-  return <div>Start Page</div>;
-};
-function App() { 
+function App() {
   const { token, login, logout, userId } = useAuth();
 
   let router;
-  if(!userId){
+  if (!userId) {
     router = createBrowserRouter(
       createRoutesFromElements(
-        <Route path="/" elemenet={<hello />}>
-          <Route path="signup" element={<Signup/>} />
-          <Route path="login" element={<Login />} />
-        </Route>
+        <>
+          <Route path="/" element={<> hello</>} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </>
       )
-    )
-    }else{
-      router = createBrowserRouter(
-        createRoutesFromElements(
-          <Route path="/" elemenet={<hello />}>
-          </Route>
-        )
+    );
+  } else {
+    router = createBrowserRouter(
+      createRoutesFromElements(
+        <Route path="/" element={<h1>Welcome</h1>} /> 
       )
-    }
-
+    );
+  }
 
   return (
-    <>
-      <AuthContext.Provider  value={{ isLoggedIn: !!token, token: token,userId: userId,login: login,logout: logout}}>
-        <RouterProvider router={router} />
-      </AuthContext.Provider>
-    </>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token: token,
+        userId: userId,
+        login: login,
+        logout: logout,
+      }}
+    >
+      <Navbar />
+      <RouterProvider router={router} />
+      <Footer />
+    </AuthContext.Provider>
   );
 }
 

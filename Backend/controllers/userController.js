@@ -24,7 +24,7 @@ const signup = async (req, res, next) => {
 
     console.log( newUser , token );
 
-    res.status(201).json({ Token: token, UserId: newUser._id });
+    res.status(201).json({ userId: newUser._id  , token : token });
   } catch (error) {
     console.log( error);
     next(new HttpError("Signup failed, try again later", 500));

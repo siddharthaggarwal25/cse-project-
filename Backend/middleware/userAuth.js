@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
     }
     const decodedToken = jwt.verify(token, 'siddharth');
 
-    req.userData = { userId: decodedToken.UserId };
+    req.userData = { userId: decodedToken.userId };
     next();
   } catch (err) {
     const error = new HttpError('Authentication failed!', 403);
