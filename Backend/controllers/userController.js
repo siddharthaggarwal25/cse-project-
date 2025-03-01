@@ -22,8 +22,11 @@ const signup = async (req, res, next) => {
       expiresIn: "1h",
     });
 
+    console.log( newUser , token );
+
     res.status(201).json({ Token: token, UserId: newUser._id });
   } catch (error) {
+    console.log( error);
     next(new HttpError("Signup failed, try again later", 500));
   }
 };

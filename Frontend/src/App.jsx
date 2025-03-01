@@ -1,26 +1,50 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
-const  Home = () => <>hiii</>;
-
-import Navbar from "./components/navbar";
+import  AuthContext  from "./context/authContext";
+import  useAuth  from "./hooks/authHook";
 import Signup from "./components/signup";
-import Login from "./components/login";
-import Footer from "./components/footer";
+import Login from "./components/login"
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  createRoutesFromElements,
+} from "react-router-dom";
 
-const App = () => {
-  return (
-    <Router>
-        <Navbar/>
-      <Routes>
-        <Route path="/" element={< Signup/>} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
-        <Footer />
-    </Router>
-  );
+import "./App.css";
+function hello () {
+  return <div>Start Page</div>;
 };
+function App() { 
+  const { token, login, logout, userId } = useAuth();
+
+  let router;
+  if(!userId){
+    router = createBrowserRouter(
+      createRoutesFromElements(
+        <Route path="/" elemenet={<hello />}>
+          <Route path="signup" element={<Signup/>} />
+          <Route path="login" element={<Login />} />
+        </Route>
+      )
+    )
+    }else{
+      router = createBrowserRouter(
+        createRoutesFromElements(
+          <Route path="/" elemenet={<hello />}>
+          </Route>
+        )
+      )
+    }
+
+
+  return (
+    <>
+      <AuthContext.Provider  value={{ isLoggedIn: !!token, token: token,userId: userId,login: login,logout: logout}}>
+        <RouterProvider router={router} />
+      </AuthContext.Provider>
+    </>
+  );
+}
 
 export default App;
