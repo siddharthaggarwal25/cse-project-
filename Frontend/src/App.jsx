@@ -5,6 +5,8 @@ import Signup from "./components/signup";
 import Login from "./components/login";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import Hero from  "./components/hero"
+import Subscription from "./components/subscription";
 
 import {
   createBrowserRouter,
@@ -21,9 +23,11 @@ function App() {
     router = createBrowserRouter(
       createRoutesFromElements(
         <>
-          <Route path="/" element={<> hello</>} />
+          <Route path="/" element={<Hero/>} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/subscription" element={<Subscription />} />
+          <Route path="/subscription" element={<Subscription />} />
         </>
       )
     );

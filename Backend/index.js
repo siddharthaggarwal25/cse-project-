@@ -19,8 +19,10 @@ app.use((req, res, next) => {
 
 
 const userRoutes= require('./routes/userRoutes');
+const questionPaperRoutes = require( "./routes/questionPaperRoutes.js");
 
 app.use(userRoutes);
+app.use( questionPaperRoutes);
 
 
 app.use((req, res, next) => next (new HttpError('Could not find this route.', 404)));

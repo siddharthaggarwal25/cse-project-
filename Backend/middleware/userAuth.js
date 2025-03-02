@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const HttpError =require('../utils/Http-Error')
+const HttpError =require('../utils/HttpError')
 
 module.exports = (req, res, next) => {
   if (req.method === 'OPTIONS') {
@@ -14,6 +14,7 @@ module.exports = (req, res, next) => {
     const decodedToken = jwt.verify(token, 'siddharth');
 
     req.userData = { userId: decodedToken.userId };
+    console.log( userData);
     next();
   } catch (err) {
     const error = new HttpError('Authentication failed!', 403);
