@@ -1,43 +1,18 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthContext from "./context/authContext";
 import useAuth from "./hooks/authHook";
 import Signup from "./components/signup";
 import Login from "./components/login";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
-import Hero from  "./components/hero"
+import Hero from "./components/hero";
 import Subscription from "./components/subscription";
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  createRoutesFromElements,
-} from "react-router-dom";
+import UploadQuestionPaper from "./components/uploadQuestionPaper";
+import Temp from "./components/temp";
 
 function App() {
-  const { token, login, logout, userId } = useAuth();
-
-  let router;
-  if (!userId) {
-    router = createBrowserRouter(
-      createRoutesFromElements(
-        <>
-          <Route path="/" element={<Hero/>} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/subscription" element={<Subscription />} />
-          <Route path="/subscription" element={<Subscription />} />
-        </>
-      )
-    );
-  } else {
-    router = createBrowserRouter(
-      createRoutesFromElements(
-        <Route path="/" element={<h1>Welcome</h1>} /> 
-      )
-    );
-  }
+  const { token, login, logout, userId  , credit , updateCredit} = useAuth();
 
   return (
     <AuthContext.Provider
@@ -47,11 +22,32 @@ function App() {
         userId: userId,
         login: login,
         logout: logout,
+        credit : credit , 
+        updateCredit : updateCredit
       }}
     >
-      <Navbar />
-      <RouterProvider router={router} />
-      <Footer />
+      <Router>
+        <Navbar /> 
+
+        <Routes>
+          {!userId ? (
+            <>
+              <Route path="/" element={<Hero />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Hero />} />
+              <Route path="/subscription" element={<Subscription />} />
+              <Route path="/upload" element={<UploadQuestionPaper />} />
+              <Route path="/temp" element={<Temp/>} />
+            </>
+          )}
+        </Routes>
+
+        <Footer />
+      </Router>
     </AuthContext.Provider>
   );
 }

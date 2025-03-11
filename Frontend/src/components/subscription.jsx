@@ -2,27 +2,25 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 
 const tiers = [
   {
-    name: 'Hobby',
+    name: 'Small',
     id: 'tier-hobby',
     href: '#',
-    priceMonthly: '$29',
-    description: "The perfect plan if you're just getting started with our product.",
-    features: ['25 products', 'Up to 10,000 subscribers', 'Advanced analytics', '24-hour support response time'],
+    priceMonthly: '500 ',
+    description: "A great plan to start with lifetime access with some credit ",
+    features: ['5000 credit ', 'Life Time access',  '24-hour support '],
     featured: false,
   },
   {
-    name: 'Enterprise',
+    name: 'Large',
     id: 'tier-enterprise',
     href: '#',
-    priceMonthly: '$99',
-    description: 'Dedicated support and infrastructure for your company.',
+    priceMonthly: '1000',
+    description: 'Lifetime access with more credits and premium benefits',
     features: [
-      'Unlimited products',
-      'Unlimited subscribers',
-      'Advanced analytics',
-      'Dedicated support representative',
-      'Marketing automations',
-      'Custom integrations',
+    '15000 credit',
+      'Life Time access',
+      '24-hour support ',
+      'Fast paper approval',
     ],
     featured: true,
   },
@@ -51,8 +49,7 @@ export default function Subscription() {
         </p>
       </div>
       <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-600 sm:text-xl/8">
-        Choose an affordable plan that’s packed with the best features for engaging your audience, creating customer
-        loyalty, and driving sales.
+        Choose an affordable plan that’s packed with the best features for your exam preap.
       </p>
       <div className="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
         {tiers.map((tier, tierIdx) => (
@@ -83,7 +80,7 @@ export default function Subscription() {
               >
                 {tier.priceMonthly}
               </span>
-              <span className={classNames(tier.featured ? 'text-gray-400' : 'text-gray-500', 'text-base')}>/month</span>
+              <span className={classNames(tier.featured ? 'text-gray-400' : 'text-gray-500', 'text-base')}>Rs.</span>
             </p>
             <p className={classNames(tier.featured ? 'text-gray-300' : 'text-gray-600', 'mt-6 text-base/7')}>
               {tier.description}

@@ -2,11 +2,12 @@ const express =require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const HttpError =require('./utils/HttpError');
+require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/cseproject1')
+mongoose.connect('mongodb://127.0.0.1:27017/cseproject2')
 .then(()=> console.log('connected to database'))   
 .catch((error)=> console.log(error));
 
@@ -16,7 +17,6 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE ,PUT')
     next();
 });
-
 
 const userRoutes= require('./routes/userRoutes');
 const questionPaperRoutes = require( "./routes/questionPaperRoutes.js");

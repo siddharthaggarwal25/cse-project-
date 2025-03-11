@@ -32,9 +32,7 @@ export default function Login() {
         throw new Error("Error occured please try again later ");
       }
       const responseData = await response.json();
-      // auth.login(responseData.UserId, responseData.Token);
-      // setIsLoading(false);
-      // redirectToNewURL();
+      auth.login(responseData.userId, responseData.token , responseData.credit);
       console.log( responseData)
     } catch (error) {
        console.log( error);

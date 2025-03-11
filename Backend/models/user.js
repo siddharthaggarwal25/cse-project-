@@ -12,7 +12,14 @@ const userSchema = new mongoose.Schema({
     Email: {
         type: String,
         required: true
-    }
+    },
+    Credits:{
+        type : Number ,
+        required : true,
+        default : 100 
+    },
+
+
 });
 
 module.exports = mongoose.model('User', userSchema);

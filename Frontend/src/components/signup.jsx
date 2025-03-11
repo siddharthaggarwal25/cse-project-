@@ -34,7 +34,7 @@ export default function Signup() {
         throw new Error("Error occured please try again later ");
       }
       const responseData = await response.json();
-      auth.login(responseData.userId, responseData.token);
+      auth.login(responseData.userId, responseData.token , 100 );
       console.log( responseData) ;
     } catch (error) {
        console.log( error);

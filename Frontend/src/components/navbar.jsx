@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import AuthContext from "../context/authContext";
-
+import { Link } from "react-router-dom";
+import { Wallet } from "lucide-react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const auth = useContext(AuthContext);
@@ -24,28 +25,40 @@ const Navbar = () => {
 
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           {auth.token ? (
-            <button
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-               onClick={()=> auth.logout()}
-            >
-              Logout
-            </button>
-          ) : (
             <>
-              {" "}
-              <button
-                type="button"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 mr-1.5 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                 Signup 
-              </button>
+              <div className="flex items-center space-x-2 bg-gray-800 text-white px-3 py-1  mr-2 rounded-lg">
+                <Wallet size={18} className="text-blue-400" />
+                <span className="text-sm font-medium">
+                  {auth.credit ? 100 : ""} Credits
+                </span>
+              </div>
               <button
                 type="button"
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={() => auth.logout()}
               >
-               Login
-              </button>{" "}
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              {" "}
+              <Link to="/signup">
+                <button
+                  type="button"
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 mr-1.5 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Signup
+                </button>
+              </Link>
+              <Link to="/login">
+                <button
+                  type="button"
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Login
+                </button>{" "}
+              </Link>
             </>
           )}
 
@@ -84,7 +97,6 @@ const Navbar = () => {
           id="navbar-sticky"
         >
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        
             <li>
               <a
                 href="/"

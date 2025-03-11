@@ -6,18 +6,20 @@ module.exports = (req, res, next) => {
     return next();
   }
   try {
-
+  
     const token = req.headers.authorization.split(' ')[1]; 
+
     if (!token) {
-      throw new Error('Authentication failed!');
+      throw new Error('Authentication  uu failed!');
     }
+  
     const decodedToken = jwt.verify(token, 'siddharth');
 
     req.userData = { userId: decodedToken.userId };
-    console.log( userData);
+
     next();
   } catch (err) {
-    const error = new HttpError('Authentication failed!', 403);
+    const error = new HttpError('Authentication uuu failed!', 403);
     return next(error);
   }
 };
