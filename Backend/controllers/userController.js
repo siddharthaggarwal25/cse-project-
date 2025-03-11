@@ -55,5 +55,22 @@ const login = async (req, res, next) => {
   }
 };
 
+const updateCredit = async (req, res, next) => {
+  try {
+    const userId = req.userData.userId;
+    const user = await  User.findById(userId);
+
+    if (!user) next(new HttpError("user not find   ", 403));
+
+    user.Credit = user.Credit + 100;
+    const savedUser = await user.save();
+    res.json({ credit: savedUser.Credit });
+  } catch (error) {
+    console.log(error);
+    next(new HttpError("error ocurued in credit chnage   ", 403));
+  }
+};
+
 exports.signup = signup;
 exports.login = login;
+exports.updateCredit= updateCredit;

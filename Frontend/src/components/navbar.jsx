@@ -29,7 +29,7 @@ const Navbar = () => {
               <div className="flex items-center space-x-2 bg-gray-800 text-white px-3 py-1  mr-2 rounded-lg">
                 <Wallet size={18} className="text-blue-400" />
                 <span className="text-sm font-medium">
-                  {auth.credit ? 100 : ""} Credits
+                  {auth.credit ? auth.credit : ""} Credits
                 </span>
               </div>
               <button

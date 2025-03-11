@@ -3,65 +3,64 @@ import { useState, useCallback, useEffect } from "react";
 let logoutTimer;
 
 const useAuth = () => {
-  const [token, setToken] = useState(false);
-  const [tokenExpirationDate, setTokenExpirationDate] = useState();
-  const [userId, setUserId] = useState(false);
-  const [credit, setCredit] = useState(false);
+  const [token, setToken] = useState(null);
+  const [tokenExpirationDate, setTokenExpirationDate] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [credit, setCredit] = useState(null);
 
-  // Login function to initialize auth state
   const login = useCallback((uid, token, currentCredit, expirationDate) => {
     setToken(token);
     setUserId(uid);
     setCredit(currentCredit);
 
-    const tokenExpirationDate =
+    const tokenExpiry =
       expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
-    setTokenExpirationDate(tokenExpirationDate);
+    setTokenExpirationDate(tokenExpiry);
 
     localStorage.setItem(
       "userData",
       JSON.stringify({
         userId: uid,
         token: token,
-        expiration: tokenExpirationDate.toISOString(),
+        expiration: tokenExpiry.toISOString(),
         credit: currentCredit,
       })
     );
+
+    console.log("User logged in:", { uid, token, currentCredit, tokenExpiry });
   }, []);
 
-  // Logout function to clear auth state
   const logout = useCallback(() => {
     setToken(null);
     setTokenExpirationDate(null);
     setUserId(null);
     setCredit(null);
     localStorage.removeItem("userData");
+
+    console.log("User logged out");
   }, []);
 
-  // Function to update credit dynamically
   const updateCredit = useCallback((newCredit) => {
     setCredit(newCredit);
-
-    // Update local storage to persist changes
     const storedData = JSON.parse(localStorage.getItem("userData"));
     if (storedData) {
       storedData.credit = newCredit;
       localStorage.setItem("userData", JSON.stringify(storedData));
+      console.log("Updated Local Storage:", storedData);
     }
   }, []);
 
-  // Auto logout based on token expiration
   useEffect(() => {
     if (token && tokenExpirationDate) {
       const remainingTime =
         tokenExpirationDate.getTime() - new Date().getTime();
       logoutTimer = setTimeout(logout, remainingTime);
+      console.log("Auto logout set for:", remainingTime / 1000, "seconds");
     } else {
       clearTimeout(logoutTimer);
     }
   }, [token, logout, tokenExpirationDate]);
 
-  // Restore auth state from local storage
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userData"));
     if (
@@ -72,11 +71,15 @@ const useAuth = () => {
       login(
         storedData.userId,
         storedData.token,
-        storedData.credit, // Ensure credit is restored
+        storedData.credit,
         new Date(storedData.expiration)
       );
     }
-  }, [login]);
+  }, []);
+  
+  useEffect(() => {
+    console.log("Credit updated in component:", credit);
+  }, [credit]);
 
   return { token, login, logout, userId, credit, updateCredit };
 };

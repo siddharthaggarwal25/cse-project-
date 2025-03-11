@@ -13,13 +13,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Credits:{
+    Credit:{
         type : Number ,
         required : true,
         default : 100 
     },
-
-
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -9,12 +9,11 @@ const Temp = () => {
     let response;
     try {
       response = await fetch("http://localhost:8000/credit", {
-        method: "GET",
+        method: "POST",
         headers: {
             Authorization: "Bearer " + auth.token,
           },
       });
-
       if (!response.ok) {
         throw new Error("Error occured please try again later ");
       }
