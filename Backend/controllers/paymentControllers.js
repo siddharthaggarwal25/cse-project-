@@ -16,7 +16,7 @@ const makePayment = async (req, res, next) => {
     }
     console.log ( order);
     res.json(order);
-  } catch (err) {
+  } catch (err) {a
     return next(new HttpError("Error", 500));
   }
 };

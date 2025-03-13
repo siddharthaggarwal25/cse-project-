@@ -20,7 +20,7 @@ const QuestionPaperSchema = new mongoose.Schema({
   },
   IsApproved: {
     type: Boolean,
-    default: true,
+    default: false,
   }, 
   CreatedAt: {
     type: Date,

@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 const userRoutes= require('./routes/userRoutes');
 const questionPaperRoutes = require( "./routes/questionPaperRoutes.js");
 const paymentRoutes = require( "./routes/paymentRoutes.js")
+const adminRoutes = require(  "./routes/adminRoutes.js")
 
 app.use(userRoutes);
 app.use( questionPaperRoutes);

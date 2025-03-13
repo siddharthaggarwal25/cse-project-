@@ -18,6 +18,11 @@ const userSchema = new mongoose.Schema({
         required : true,
         default : 100 
     },
+    Notification :[
+         {
+            type: String ,
+         }
+    ]
 });
 
 module.exports = mongoose.model('User', userSchema);

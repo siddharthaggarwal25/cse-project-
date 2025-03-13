@@ -24,8 +24,9 @@ const uploadQuestionPaper = async (req, res, next) => {
 };
 
 
-const Paper = async( req , res , next)=>{
+const questionPaper = async( req , res , next)=>{
   try{
+       console.log( "question paper arriving ");
        const papers = await QuestionPaper.find();
        console.log( papers);
        if( !papers)return next ( new HttpError ( " Error occured in fetching " , 403 )) ;
@@ -37,4 +38,4 @@ const Paper = async( req , res , next)=>{
 
 
 exports.uploadQuestionPaper = uploadQuestionPaper;
-exports.Paper= Paper;
+exports.questionPaper = questionPaper;
