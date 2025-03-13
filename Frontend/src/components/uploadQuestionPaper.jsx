@@ -6,6 +6,7 @@ const UploadQuestionPaper = () => {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [topic, setTopic] = useState("");
+  const [subject, setSubject] = useState("");
 
   const handleFileChange = (e) => {
     const uploadedFile = e.target.files[0];
@@ -28,11 +29,13 @@ const UploadQuestionPaper = () => {
     e.preventDefault();
     if (!file) return alert("Please select a file");
     if (!topic.trim()) return alert("Please enter a topic");
+    if (!subject.trim()) return alert("Please enter a Subject");
     if (!auth?.token) return alert("You are not authorized. Please log in.");
 
     const formData = new FormData();
     formData.append("file", file);
     formData.append("topic", topic);
+    formData.append("subject", subject);
 
     try {
       const response = await fetch("http://localhost:8000/upload", {
@@ -62,6 +65,16 @@ const UploadQuestionPaper = () => {
 
       <form onSubmit={handleUpload} className="space-y-4">
         <div className="border border-gray-700 p-4 rounded-lg">
+          <label className="block text-sm font-medium mb-2">Subject:</label>
+          <input
+            type="text"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter subject "
+          />
+        </div>
+        <div className="border border-gray-700 p-4 rounded-lg">
           <label className="block text-sm font-medium mb-2">Topic:</label>
           <input
             type="text"
@@ -73,7 +86,9 @@ const UploadQuestionPaper = () => {
         </div>
 
         <div className="border border-gray-700 p-4 rounded-lg">
-          <label className="block text-sm font-medium mb-2">Select a file:</label>
+          <label className="block text-sm font-medium mb-2">
+            Select a file:
+          </label>
           <input
             type="file"
             accept="image/jpeg, image/png, application/pdf"

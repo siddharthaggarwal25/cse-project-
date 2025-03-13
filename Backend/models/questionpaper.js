@@ -5,6 +5,10 @@ const QuestionPaperSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  Subject : {
+      type : String ,
+      required  : true 
+  },
   UrlLink: {
     type: String,
     required: true,
@@ -17,7 +21,7 @@ const QuestionPaperSchema = new mongoose.Schema({
   IsApproved: {
     type: Boolean,
     default: true,
-  }, // currently creating true change it later ...
+  }, 
   CreatedAt: {
     type: Date,
     default: Date.now,

@@ -7,10 +7,12 @@ const uploadQuestionPaper = async (req, res, next) => {
   try {
     const Owner = req.userData.userId;
     const Title = req.body.topic;
+    const Subject = req.body.subject;
     const UrlLink = req.file.path;
     const questionpaper = new QuestionPaper({
       Owner,
       Title,
+      Subject ,
       UrlLink,
     });
     await questionpaper.save();
@@ -22,4 +24,17 @@ const uploadQuestionPaper = async (req, res, next) => {
 };
 
 
+const Paper = async( req , res , next)=>{
+  try{
+       const papers = await QuestionPaper.find();
+       console.log( papers);
+       if( !papers)return next ( new HttpError ( " Error occured in fetching " , 403 )) ;
+       res.json ( papers);
+  }catch( error){
+    console.log( error);
+  }
+}
+
+
 exports.uploadQuestionPaper = uploadQuestionPaper;
+exports.Paper= Paper;

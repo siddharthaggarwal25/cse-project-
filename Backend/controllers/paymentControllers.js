@@ -14,6 +14,7 @@ const makePayment = async (req, res, next) => {
     if (!order) {
       return;
     }
+    console.log ( order);
     res.json(order);
   } catch (err) {
     return next(new HttpError("Error", 500));
@@ -21,6 +22,7 @@ const makePayment = async (req, res, next) => {
 };
 
 const validatePayment = async (req, res, next) => {
+  console.log ( "-------------" , req.body);
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
       req.body;
@@ -30,13 +32,12 @@ const validatePayment = async (req, res, next) => {
     if (digest !== razorpay_signature) {
       return next(new HttpError("Transaction failed ", 403));
     }
-
     const user = await User.findById(req.userData.userId);
     if (!user) return next(new HttpError("User not find ", 402));
 
-    if (req.amount == 500) user.Credit = userCredit + 5000;
-    else userCredit = userCredit + 10000;
+     user.Credit = user.Credit + 10000;
     const savedUser = await user.save();
+    console.log( savedUser);
     res.json({ credit: savedUser.Credit });
   } catch (error) {
     console.log(error);

@@ -7,8 +7,9 @@ const { storage } = require("../utils/cloudinary");
 const upload = multer({ storage });
 
 
-
+router.get( "/paper" , questionPaperControllers.Paper)
 router.post("/upload", isAuthenticated ,upload.single('file') ,  questionPaperControllers.uploadQuestionPaper);
+
 
 
 module.exports = router;

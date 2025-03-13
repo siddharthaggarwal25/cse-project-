@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/cseproject2')
+mongoose.connect('mongodb://127.0.0.1:27017/cseproject3')
 .then(()=> console.log('connected to database'))   
 .catch((error)=> console.log(error));
 

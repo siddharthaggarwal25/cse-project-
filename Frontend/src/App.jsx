@@ -9,7 +9,7 @@ import Footer from "./components/footer";
 import Hero from "./components/hero";
 import Subscription from "./components/subscription";
 import UploadQuestionPaper from "./components/uploadQuestionPaper";
-import Temp from "./components/temp";
+import Papers from "./components/exampaper";
 
 function App() {
   const { token, login, logout, userId  , credit , updateCredit} = useAuth();
@@ -41,7 +41,7 @@ function App() {
               <Route path="/" element={<Hero />} />
               <Route path="/subscription" element={<Subscription />} />
               <Route path="/upload" element={<UploadQuestionPaper />} />
-              <Route path="/temp" element={<Temp/>} />
+              <Route path="/papers" element={<Papers />} />
             </>
           )}
         </Routes>
