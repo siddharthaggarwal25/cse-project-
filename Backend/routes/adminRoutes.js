@@ -4,6 +4,6 @@ const isAuthenticated = require( "../middleware/userAuth");
 const adminControllers = require ( "../controllers/adminControllers");
 
 
-router.post( "/admin.updateAproved" , adminControllers.updateAproved) 
+router.post( "/admin/updateApproved" , adminControllers.updateApproved) 
 
 module.exports = router;

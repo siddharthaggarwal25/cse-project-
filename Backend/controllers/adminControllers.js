@@ -1,35 +1,41 @@
 const HttpError = require("../utils/HttpError");
 const User = require("../models/user");
 const QuestionPaper = require("../models/questionpaper");
-const updateAproved = async (req, res, next) => {
+
+const updateApproved = async (req, res, next) => {
   try {
-    const aproved = req.body.aproved;
-    if (!aproved) return next(new HttpError(" status not Found   ", 403));
+    const approved = req.body.approved;
+    if (!approved) return next(new HttpError(" status not Found   ", 403));
 
     const questionPapersId = req.body.questionPapersId;
     if (!questionPapersId)
-      return next(new HttpError(" question paer Id not Found   ", 403));
+      return next(new HttpError(" question paper Id not Found   ", 403));
 
     const paper = await QuestionPaper.findById(questionPapersId);
     if (!paper) return next(new HttpError(" paperNotFound  ", 403));
 
-    if (aproved == "true") {
+    if (approved == "true") {
       paper.IsApproved = true;
       const savedPaper = await paper.save();
       const user = await User.findById(savedPaper.Owner);
       user.Credit = user.Credit + 100;
-      user.Notification.push(" Paper is accepted , 100 credit is added ");
+      user.Notification.push({
+        Message: "Paper have been approved",
+        Type: "Approved",
+      });
       await user.save();
 
       res.json({
         message: "question paper is Successfuly approved ",
       });
     } else {
-      const deletedPaper = await QuestionPaper.findByIdAndDelete(
-        questionPapersId
-      );
+      await QuestionPaper.findByIdAndDelete(questionPapersId);
       const user = await User.findById(paper.Owner);
-      user.Notification.push(" question paer not accepted");
+      user.Notification.push({
+        Message: "Paper have not been approved",
+        Type: "NotApproved",
+      });
+      await user.save();
       res.json({ message: " question paper not accepted" });
     }
   } catch (error) {
@@ -37,4 +43,4 @@ const updateAproved = async (req, res, next) => {
   }
 };
 
-exports.updateAproved = updateAproved;
+exports.updateApproved = updateApproved;

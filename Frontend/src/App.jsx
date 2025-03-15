@@ -35,6 +35,7 @@ function App() {
               <Route path="/" element={<Hero />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
+              <Route path="*" element={<Signup />} />
             </>
           ) : (
             <>
@@ -42,6 +43,7 @@ function App() {
               <Route path="/subscription" element={<Subscription />} />
               <Route path="/upload" element={<UploadQuestionPaper />} />
               <Route path="/papers" element={<Papers />} />
+              <Route path="*" element={<Hero />} />
             </>
           )}
         </Routes>
