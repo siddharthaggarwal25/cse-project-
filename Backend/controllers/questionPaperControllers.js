@@ -27,7 +27,7 @@ const uploadQuestionPaper = async (req, res, next) => {
 const questionPaper = async( req , res , next)=>{
   try{
        console.log( "question paper arriving ");
-       const papers = await QuestionPaper.find();
+       const papers = await QuestionPaper.find({IsApproved : true});
        console.log( papers);
        if( !papers)return next ( new HttpError ( " Error occured in fetching " , 403 )) ;
        res.json ( papers);

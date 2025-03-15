@@ -10,9 +10,12 @@ import Hero from "./components/hero";
 import Subscription from "./components/subscription";
 import UploadQuestionPaper from "./components/uploadQuestionPaper";
 import Papers from "./components/exampaper";
+import AdminReview  from "./components/Admin/adminUpdate"
+import Admin from "./components/Admin/adminHome";
+
 
 function App() {
-  const { token, login, logout, userId  , credit , updateCredit} = useAuth();
+  const { token, login, logout, userId, credit, updateCredit } = useAuth();
 
   return (
     <AuthContext.Provider
@@ -22,12 +25,12 @@ function App() {
         userId: userId,
         login: login,
         logout: logout,
-        credit : credit , 
-        updateCredit : updateCredit
+        credit: credit,
+        updateCredit: updateCredit,
       }}
     >
       <Router>
-        <Navbar /> 
+        <Navbar />
 
         <Routes>
           {!userId ? (
@@ -35,7 +38,7 @@ function App() {
               <Route path="/" element={<Hero />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
-              <Route path="*" element={<Signup />} />
+              <Route path="/*" element={<Signup />} />
             </>
           ) : (
             <>
@@ -43,12 +46,16 @@ function App() {
               <Route path="/subscription" element={<Subscription />} />
               <Route path="/upload" element={<UploadQuestionPaper />} />
               <Route path="/papers" element={<Papers />} />
-              <Route path="*" element={<Hero />} />
+              <Route path="/*" element={<Hero />} />
             </>
           )}
         </Routes>
 
         <Footer />
+        {/* <Routes>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/review/:id" element={<AdminReview />} />
+        </Routes> */}
       </Router>
     </AuthContext.Provider>
   );

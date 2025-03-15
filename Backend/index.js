@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/cseproject3')
+mongoose.connect('mongodb://127.0.0.1:27017/cseproject4')
 .then(()=> console.log('connected to database'))   
 .catch((error)=> console.log(error));
 
@@ -26,6 +26,7 @@ const adminRoutes = require(  "./routes/adminRoutes.js")
 app.use(userRoutes);
 app.use( questionPaperRoutes);
 app.use( paymentRoutes);
+app.use( adminRoutes);
 
 
 app.use((req, res, next) => next (new HttpError('Could not find this route.', 404)));
