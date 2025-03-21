@@ -29,9 +29,10 @@ function App() {
         updateCredit: updateCredit,
       }}
     >
+      <div className="flex flex-col px-4 min-h-screen sm:px-10 md:px-14 lg:px-28 bg-gradient-to-b from-teal-50 to-orange-50">
       <Router>
         <Navbar />
-
+        <main className="flex-grow">
         <Routes>
           {!userId ? (
             <>
@@ -50,13 +51,14 @@ function App() {
             </>
           )}
         </Routes>
-
+        </main>
         <Footer />
         {/* <Routes>
           <Route path="/admin" element={<Admin />} />
           <Route path="/review/:id" element={<AdminReview />} />
         </Routes> */}
       </Router>
+      </div>
     </AuthContext.Provider>
   );
 }

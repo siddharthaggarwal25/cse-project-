@@ -7,5 +7,4 @@ router.post("/signup", userControllers.signup);
 router.post("/login", userControllers.login);
 router.post ( '/updateCredit' ,isAuthenticated ,  userControllers.updateCredit);
 
-
 module.exports = router;

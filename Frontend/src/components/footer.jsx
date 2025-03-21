@@ -1,135 +1,24 @@
 import React from "react";
-
-import { Facebook, Twitter, LinkedIn } from "@mui/icons-material";
+import { assets } from "../assets/assets";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer class="bg-gray-800 text-white py-6">
-      <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div>
-          <h2 class="text-lg font-semibold">About</h2>
-          <p class="text-sm mt-2 text-gray-300">
-            An online repository for exam papers, solutions, and
-            recommendations.
-          </p>
-        </div>
-
-        <div>
-          <h2 class="text-lg font-semibold px-3">Quick Links</h2>
-          <ul class="mt-2 space-y-2">
-            <li>
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white
-                      rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Exam Papers
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white
-                      rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Upload Paper
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white
-                      rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Subscriptions
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white
-                      rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Referral Program
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h2 class="text-lg font-semibold px-3">Support</h2>
-          <ul class="mt-2 space-y-2">
-            <li>
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white
-                      rounded-md px-3 py-2 text-sm font-medium"
-              >
-                FAQs
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white
-                      rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Contact Us
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white
-                      rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Report an Issue
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white
-                      rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Privacy Policy
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h2 class="text-lg font-semibold px-3">Follow Us</h2>
-          <div className="flex space-x-4 px-3">
-            <a
-              href="#"
-              className="flex items-center gap-1 text-gray-300 hover:text-blue-500"
-            >
-              <Twitter fontSize="small" />
-              <span>Twitter</span>
-            </a>
-            <a
-              href="#"
-              className="flex items-center gap-1 text-gray-300 hover:text-blue-700"
-            >
-              <Facebook fontSize="small" />
-              <span>Facebook</span>
-            </a>
-            <a
-              href="#"
-              className="flex items-center gap-1 text-gray-300 hover:text-blue-600"
-            >
-              <LinkedIn fontSize="small" />
-              <span>LinkedIn</span>
-            </a>
-          </div>
-        </div>
+    <div className="py-2  mt-20 flex items-center gap-4 justify-between mx-20 border-t-1 border-stone-300">
+      <div className="flex items-center gap-2">
+        <Link to="/">
+          <img src={assets.logo_icon} alt="logo" className="h-8" />
+        </Link>
+        <p className="text-stone-400 text-sm flex-1 pl-5 ml-5 border-l border-stone-500">
+          Copyright @examStack | All right reserved.{" "}
+        </p>
       </div>
-
-      <div class="text-center text-sm mt-6 border-t border-gray-700 pt-4">
-        © 2025 Exam Repository System. All rights reserved.
+      <div className="flex gap-2.5">
+        <img src={assets.facebook_icon} alt="" width={35} />
+        <img src={assets.instagram_icon} alt="" width={35} />
+        <img src={assets.twitter_icon} alt="" width={35} />
       </div>
-    </footer>
+    </div>
   );
 };
 
